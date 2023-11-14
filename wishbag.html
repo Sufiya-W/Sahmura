@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Wish Bag</title>
+  <style>
+    body {
+      background-image: url("C:/Users/Zulaikha/OneDrive/Desktop/OOP/SahmuraFile/src/cd53bb6b3291aff378e8fd72f61396be.jpg");
+    }
+
+    .bigRectangle {
+      background-color: #ffe5ec;
+      margin: auto;
+      width: 70%;
+      border: 3px solid #73AD21;
+      padding: 10px;
+      height : 550px;
+      opacity: 98%;
+      position: sticky;
+    }
+    .bigRectangle h1 {
+      padding-left: 2%;
+    }
+    a {
+      text-decoration: none;
+      display: inline-block;
+      padding: 8px 16px;
+    }
+
+    a:hover {
+      background-color: #73AD21;
+      color: black;
+    }
+
+    .previous {
+      background-color: #f1f1f1;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <br><br>
+  <!-- Display wish bag content here -->
+  <div class="bigRectangle">
+    <a href="index.html" class="previous">&laquo; Previous</a>
+    <h1>WISH BAG</h1>
+    <ul id="wishbagList"></ul>
+  </div>
+  <script>
+    // Retrieve wish bag content from localStorage
+    var wishbag = JSON.parse(localStorage.getItem('wishbag')) || [];
+
+    // Function to update the wish bag in the UI
+    function updateWishBag() {
+      var wishbagListElement = document.getElementById('wishbagList');
+      // Clear the current wish bag list in the UI
+      wishbagListElement.innerHTML = '';
+
+      // Display wish bag content in the "wishbagList" ul element
+      wishbag.forEach((product, index) => {
+        var listItem = document.createElement('li');
+
+        // Display product name
+        var productNameSpan = document.createElement('span');
+        productNameSpan.textContent = product;
+        listItem.appendChild(productNameSpan);
+
+        // Add 5 spaces between the product name and the delete button
+        listItem.appendChild(document.createTextNode('\u00A0\u00A0\u00A0\u00A0\u00A0'));
+
+        // Create a delete button for each product
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function () {
+          removeFromWishBag(index); // Call the function to remove the product
+        });
+
+        // Append the delete button to the list item
+        listItem.appendChild(deleteButton);
+
+        // Append the list item to the wish bag list
+        wishbagListElement.appendChild(listItem);
+      });
+    }
+
+    // Display wish bag content in the UI on page load
+    updateWishBag();
+
+    // Function to add a product to the wish bag
+    function addToWishBag(product) {
+      wishbag.push(product);
+      updateWishBag(); // Update the UI
+      saveWishBag();  // Save the wish bag to localStorage
+    }
+
+    // Function to remove a product from the wish bag
+    function removeFromWishBag(index) {
+      wishbag.splice(index, 1);
+      updateWishBag(); // Update the UI
+      saveWishBag();  // Save the wish bag to localStorage
+    }
+
+    // Function to save the wish bag to localStorage
+    function saveWishBag() {
+      localStorage.setItem('wishbag', JSON.stringify(wishbag));
+    }
+  </script>
+</body>
+
+</html>

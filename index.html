@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Makeup Box</title>
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif
+    }
+    .clickable {
+      cursor: pointer;
+      color: blue; /* Change the color as desired */
+      text-decoration: underline; /* Add underline for emphasis */
+    }
+  </style>
+  <script src="main.js"></script>
+</head>
+<body>
+  <div class="row1">
+    <div class="topnav">
+      <img src="C:\Users\Zulaikha\OneDrive\Desktop\OOP\SahmuraFile\2jpg.jpg">
+      <div class="centered">SAHMURA</div>
+      <a href="notepad.html" class="split">Note</a>
+      <a href="index.html" >Search</a>
+      <a href="wishbag.html">Wish Bag</a>
+    </div>
+  </div>
+  <div class="row2">
+    <h1>Makeup Box</h1>
+    <label for="brandsDropdown">Brands</label>
+    <select name="brand" id="brand">
+      <option value="almay">almay</option>
+      <option value="alva">alva</option>
+      <option value="anna sui">anna sui</option>
+      <option value="annabelle">annabelle</option>
+      <option value="benefit">benefit</option>
+      <option value="boosh">boosh</option>
+      <option value="burt's bees">burt's bees</option>
+      <option value="butter london">butter london</option>
+      <option value="c'est moi">c'est moi</option>
+      <option value="cargo cosmetics">cargo cosmetics</option>
+      <option value="china glaze">china glaze</option>
+      <option value="clinique">clinique</option>
+      <option value="coastal classic creation">coastal classic creation</option>
+      <option value="colourpop">colourpop</option>
+      <option value="covergirl">covergirl</option>
+      <option value="dalish">dalish</option>
+      <option value="deciem">deciem</option>
+      <option value="dior">dior</option>
+      <option value="dr. hauschka">dr. hauschka</option>
+      <option value="e.l.f.">e.l.f.</option>
+      <option value="essie">essie</option>
+      <option value="fenty">fenty</option>
+      <option value="glossier">glossier</option>
+      <option value="green people">green people</option>
+      <option value="iman">iman</option>
+      <option value="l'oreal">l'oreal</option>
+      <option value="lotus cosmetics usa">lotus cosmetics usa</option>
+      <option value="maia's mineral galaxy">maia's mineral galaxy</option>
+      <option value="marcelle">marcelle</option>
+      <option value="marienatie">marienatie</option>
+      <option value="maybelline">maybelline</option>
+      <option value="milani">milani</option>
+      <option value="mineral fusion">mineral fusion</option>
+      <option value="misa">misa</option>
+      <option value="mistura">mistura</option>
+      <option value="moov">moov</option>
+      <option value="nudus">nudus</option>
+      <option value="nyx">nyx</option>
+      <option value="orly">orly</option>
+      <option value="pacifica">pacifica</option>
+      <option value="penny lane organics">penny lane organics</option>
+      <option value="physicians formula">physicians formula</option>
+      <option value="piggy paint">piggy paint</option>
+      <option value="pure anada">pure anada</option>
+      <option value="rejuva minerals">rejuva minerals</option>
+      <option value="revlon">revlon</option>
+      <option value="sally b's skin yummies">sally b's skin yummies</option>
+      <option value="salon perfect">salon perfect</option>
+      <option value="sante">sante</option>
+      <option value="sinful colours">sinful colours</option>
+      <option value="smashbox">smashbox</option>
+      <option value="stila">stila</option>
+      <option value="suncoat">suncoat</option>
+      <option value="w3llpeople">w3llpeople</option>
+      <option value="wet n wild">wet n wild</option>
+      <option value="zorah">zorah</option>
+      <option value="zorah biocosmetiques">zorah biocosmetiques</option>
+    </select>
+    <input type="text" id="category" placeholder="Search... ">
+    <button onclick="getMakeUp()">Get Makeup</button>
+  </div>
+  <br><br>
+  <div class="row3">
+    <div class="column left" style="background-color:white">
+      <div id="productList"></div>
+    </div>
+    <div class="column right" style="background-color:pink;">
+      <h2>Filters</h2>
+      <div class="tags">
+        <div class="tags">
+          <div class="tags">
+            <h3>Tags:</h3>
+            
+            <!-- Generate checkboxes for each tag -->
+            <label for="certCleanCheckbox">
+              <input type="checkbox" id="certCleanCheckbox" class="filter-checkbox" /> CertClean
+            </label>
+            
+            <label for="chemicalFreeCheckbox">
+              <input type="checkbox" id="chemicalFreeCheckbox" class="filter-checkbox" /> Chemical Free
+            </label>
+            <br>
+            <label for="dairyFreeCheckbox">
+              <input type="checkbox" id="dairyFreeCheckbox" class="filter-checkbox" /> Dairy Free
+            </label>
+            
+            <label for="ewgVerifiedCheckbox">
+              <input type="checkbox" id="ewgVerifiedCheckbox" class="filter-checkbox" /> EWG Verified
+            </label>
+            <br>
+            <label for="ecoCertCheckbox">
+              <input type="checkbox" id="ecoCertCheckbox" class="filter-checkbox" /> EcoCert
+            </label>
+            
+            <label for="fairTradeCheckbox">
+              <input type="checkbox" id="fairTradeCheckbox" class="filter-checkbox" /> Fair Trade
+            </label>
+            <br>
+            <label for="glutenFreeCheckbox">
+              <input type="checkbox" id="glutenFreeCheckbox" class="filter-checkbox" /> Gluten Free
+            </label>
+            
+            <label for="hypoallergenicCheckbox">
+              <input type="checkbox" id="hypoallergenicCheckbox" class="filter-checkbox" /> Hypoallergenic
+            </label>
+            <br>
+            <label for="naturalCheckbox">
+              <input type="checkbox" id="naturalCheckbox" class="filter-checkbox" /> Natural
+            </label>
+            
+            <label for="noTalcCheckbox">
+              <input type="checkbox" id="noTalcCheckbox" class="filter-checkbox" /> No Talc
+            </label>
+            <br>
+            <label for="nonGMOCheckbox">
+              <input type="checkbox" id="nonGMOCheckbox" class="filter-checkbox" /> Non-GMO
+            </label>
+            
+            <label for="organicCheckbox">
+              <input type="checkbox" id="organicCheckbox" class="filter-checkbox" /> Organic
+            </label>
+            <br>
+            <label for="peanutFreeProductCheckbox">
+              <input type="checkbox" id="peanutFreeProductCheckbox" class="filter-checkbox" /> Peanut Free Product
+            </label>
+            
+            <label for="sugarFreeCheckbox">
+              <input type="checkbox" id="sugarFreeCheckbox" class="filter-checkbox" /> Sugar Free
+            </label>
+            <br>
+            <label for="usdaOrganicCheckbox">
+              <input type="checkbox" id="usdaOrganicCheckbox" class="filter-checkbox" /> USDA Organic
+            </label>
+            
+            <label for="veganCheckbox">
+              <input type="checkbox" id="veganCheckbox" class="filter-checkbox" /> Vegan
+            </label>
+            <br>
+            <label for="alcoholFreeCheckbox">
+              <input type="checkbox" id="alcoholFreeCheckbox" class="filter-checkbox" /> Alcohol Free
+            </label>
+            
+            <label for="crueltyFreeCheckbox">
+              <input type="checkbox" id="crueltyFreeCheckbox" class="filter-checkbox" /> Cruelty Free
+            </label>
+            <br>
+            <label for="oilFreeCheckbox">
+              <input type="checkbox" id="oilFreeCheckbox" class="filter-checkbox" /> Oil Free
+            </label>
+            
+            <label for="purpicksCheckbox">
+              <input type="checkbox" id="purpicksCheckbox" class="filter-checkbox" /> Purpicks
+            </label>
+            <br>
+            <label for="siliconeFreeCheckbox">
+              <input type="checkbox" id="siliconeFreeCheckbox" class="filter-checkbox" /> Silicone Free
+            </label>
+            
+            <label for="waterFreeCheckbox">
+              <input type="checkbox" id="waterFreeCheckbox" class="filter-checkbox" /> Water Free
+            </label>
+          </div>
+          
+        <br>
+        <button onclick="applyFilter()">Apply Filter</button>
+      </div>
+      <br>
+    </div>
+  </div>
+  <br><br><br>
+  <script>
+    function promptAddToWishbag(product, buttonId) {
+    var confirmation = confirm(`Do you want to add "${product}" to your Wish Bag?`);
+    if (confirmation) {
+      addToWishbag(product);
+      updateWishBag();
+  }
+}
+  </script>
+  </div>
+</body>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Makeup Box</title>
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif
+    }
+
+    .clickable {
+      cursor: pointer;
+      color: blue; /* Change the color as desired */
+      text-decoration: underline; /* Add underline for emphasis */
+    }
+
+    #add-note {
+      padding: 20px;
+      background-color: #f1f1f1;
+      text-align: center;
+      border-top: 1px solid #ddd;
+    }
+
+    #notes-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .note {
+      width: 30%; /* Set the width to approximately 30% to fit three notes in a row */
+      margin: 20px; /* Add some margin for spacing */
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+      background-color: #ffe5ec; /* Set the background color for notes */
+      padding: 10px; /* Add padding to notes for better visibility */
+    }
+
+    .note textarea {
+      width: 100%;
+      height: 100px; /* Set the desired height of each textarea */
+      font-weight: bold; /* Make the text in the textarea slightly thicker */
+    }
+
+    .note-actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+  </style>
+  <script src="main.js"></script>
+</head>
+
+<body>
+  <div class="row1">
+    <div class="topnav">
+      <img src="C:\Users\Zulaikha\OneDrive\Desktop\OOP\SahmuraFile\2jpg.jpg">
+      <div class="centered">SAHMURA</div>
+      <a href="notepad.html" class="split">Note</a>
+      <a href="index.html">Search</a>
+      <a href="wishbag.html">Wish Bag</a>
+    </div>
+  </div>
+  <div id="notepad-container">
+    <div id="notepad-header">
+      <h1>NOTEPAD</h1>
+    </div>
+    <br><br>
+    <div id="add-note">
+      <textarea placeholder="Enter your note"></textarea>
+      <button onclick="addNote()">Add Note</button>
+    </div>
+    <br><br>
+    <div id="notes-container"></div>
+    <br><br>
+  </div>
+
+  <script>
+    // Load notes from local storage on page load
+    document.addEventListener('DOMContentLoaded', loadNotes);
+
+    function addNote() {
+      const notesContainer = document.getElementById('notes-container');
+      const noteText = document.querySelector('#add-note textarea').value.trim();
+
+      if (noteText === '') {
+        alert('Please enter a note.');
+        return;
+      }
+
+      const noteDiv = document.createElement('div');
+      noteDiv.classList.add('note');
+
+      const noteTextarea = document.createElement('textarea');
+      noteTextarea.value = noteText;
+      noteTextarea.setAttribute('readonly', true);
+
+      const noteActions = document.createElement('div');
+      noteActions.classList.add('note-actions');
+
+      const deleteButton = document.createElement('button');
+      deleteButton.innerText = 'Delete';
+      deleteButton.classList.add('delete');
+      deleteButton.onclick = function () {
+        notesContainer.removeChild(noteDiv);
+        saveNotes(); // Save notes after deletion
+      };
+
+      const updateButton = document.createElement('button');
+      updateButton.innerText = 'Update';
+      updateButton.classList.add('update');
+      updateButton.onclick = function () {
+        noteTextarea.removeAttribute('readonly');
+        noteTextarea.focus();
+      };
+
+      noteActions.appendChild(deleteButton);
+      noteActions.appendChild(updateButton);
+
+      noteDiv.appendChild(noteTextarea);
+      noteDiv.appendChild(noteActions);
+
+      notesContainer.appendChild(noteDiv);
+
+      // Save notes after addition
+      saveNotes();
+
+      // Clear the input textarea
+      document.querySelector('#add-note textarea').value = '';
+    }
+
+    function saveNotes() {
+      const notes = Array.from(document.querySelectorAll('.note textarea')).map(note => note.value);
+      localStorage.setItem('notes', JSON.stringify(notes));
+    }
+
+    function loadNotes() {
+      const notesContainer = document.getElementById('notes-container');
+      const savedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+
+      savedNotes.forEach(noteText => {
+        const noteDiv = document.createElement('div');
+        noteDiv.classList.add('note');
+
+        const noteTextarea = document.createElement('textarea');
+        noteTextarea.value = noteText;
+        noteTextarea.setAttribute('readonly', true);
+
+        const noteActions = document.createElement('div');
+        noteActions.classList.add('note-actions');
+
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Delete';
+        deleteButton.classList.add('delete');
+        deleteButton.onclick = function () {
+          notesContainer.removeChild(noteDiv);
+          saveNotes(); // Save notes after deletion
+        };
+
+        const updateButton = document.createElement('button');
+        updateButton.innerText = 'Update';
+        updateButton.classList.add('update');
+        updateButton.onclick = function () {
+          noteTextarea.removeAttribute('readonly');
+          noteTextarea.focus();
+        };
+
+        noteActions.appendChild(deleteButton);
+        noteActions.appendChild(updateButton);
+
+        noteDiv.appendChild(noteTextarea);
+        noteDiv.appendChild(noteActions);
+
+        notesContainer.appendChild(noteDiv);
+      });
+    }
+  </script>
+</body>
+
+</html>
